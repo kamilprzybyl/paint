@@ -33,7 +33,7 @@ int	micro_paint(FILE *file, t_draw_zone *draw_zone)
 	ret = fscanf(file, "%c %f %f %f %f %c\n", &rect.type, &rect.x, &rect.y, &rect.width, &rect.height, &rect.symbol);
 	while (ret == 6)
 	{
-		if (rect.width <= 0.0f || rect.height <= 0.0 || (rect.type != 'r' && rect.type != 'R'))
+		if (rect.width <= 0.0f || rect.height <= 0.0f || (rect.type != 'r' && rect.type != 'R'))
 			return (1);
 		draw(draw_zone, &rect);
 		ret = fscanf(file, "%c %f %f %f %f %c\n", &rect.type, &rect.x, &rect.y, &rect.width, &rect.height, &rect.symbol);
