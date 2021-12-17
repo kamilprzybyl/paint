@@ -30,13 +30,19 @@ int	main(int argc, char *argv[])
 		return (1);
 	}
 	if (init(file, &draw_zone) == 1)
+	{
+		write(1, "Error: Operation file corrupted\n", 32);
 		return (1);
+	}
 	if (micro_paint(file, &draw_zone) == 1)
+	{
+		write(1, "Error: Operation file corrupted\n", 32);
 		return (1);
+	}
 	for (int i = 0; i < draw_zone.height; i++) {
 		for (int j = 0; j < draw_zone.width; j++)
-			printf("%c", draw_zone.matrice[i][j]);
-		printf("\n");
+			write(1, &draw_zone.matrice[i][j], 1);
+		write(1, "\n", 1);
 	}
 	return (0);
 }

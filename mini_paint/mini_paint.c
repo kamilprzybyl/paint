@@ -1,17 +1,17 @@
 #include "mini_paint.h"
 
-int	is_in_circle(t_circle *circle, float y, float x)
+static int	is_in_circle(t_circle *circle, float y, float x)
 {
 	float	distance;
 
 	distance = sqrtf(powf(x - circle->x, 2) + powf(y - circle->y, 2));
-    if (distance <= circle->radius)
-    {
-        if ((circle->radius - distance) < 1.)
-            return (2);
-        return (1);
-    }
-    return (0);
+	if (distance <= circle->radius)
+	{
+		if ((circle->radius - distance) < 1.0f)
+			return (2);
+		return (1);
+	}
+	return (0);
 }
 
 static void	draw(t_draw_zone *draw_zone, t_circle *circle)
@@ -41,5 +41,7 @@ int	mini_paint(t_draw_zone *draw_zone, FILE *file)
 		draw(draw_zone, &circle);
 		ret = fscanf(file, "%c %f %f %f %c\n", &circle.type, &circle.x, &circle.y, &circle.radius, &circle.symbol);
 	}
-	return (0);
+	if (ret == EOF)
+		return(0);
+	return (1);
 }
